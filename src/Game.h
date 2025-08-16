@@ -2,6 +2,7 @@
 #include "structs.h"
 #include "SDL.h"
 #include "SDL_opengl.h"
+#include "EntityManager.h"
 
 class Game
 {
@@ -23,7 +24,7 @@ public:
 	// Event handling
 	void ProcessKeyDownEvent(const SDL_KeyboardEvent& e)
 	{
-
+		EntityManager::Get()->GetPlayer()->KeyBoardEvent(e);
 	}
 	void ProcessKeyUpEvent(const SDL_KeyboardEvent& e)
 	{
@@ -60,7 +61,7 @@ private:
 	bool m_Initialized;
 	// Prevent timing jumps when debugging
 	const float m_MaxElapsedSeconds;
-	
+
 	// FUNCTIONS
 	void InitializeGameEngine( );
 	void CleanupGameEngine( );

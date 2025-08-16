@@ -2,6 +2,7 @@
 #include <vector>
 #include "structs.h"
 
+
 namespace utils
 {
 	const float g_Pi{ 3.1415926535f };

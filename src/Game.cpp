@@ -7,6 +7,8 @@
 #include "Game.h"
 #include "utils.h"
 #include "structs.h"
+#include "FlyFish.h"
+
 
 Game::Game(const Window& window)
 	: m_Window{ window }
@@ -100,7 +102,10 @@ void Game::InitializeGameEngine()
 		return;
 	}
 
+	EntityManager::Get()->AddPillar(ThreeBlade(m_Window.width/2, m_Window.height/2, 0), 30);
+	EntityManager::Get()->AddPlayer(ThreeBlade(m_Window.width / 2 - 100, m_Window.height / 2, 0), 20, 100);
 	m_Initialized = true;
+
 }
 
 void Game::Run()
@@ -193,8 +198,21 @@ void Game::CleanupGameEngine()
 
 void Game::Update(float elapsedSec)
 {
+	EntityManager::Get()->Update(elapsedSec);
 }
 
 void Game::Draw() const
 {
+	if (EntityManager::Get()->GetPlayer()->IsMirrorMode())
+	{
+		utils::SetColor(Color4f{ 0,0,0,1 });
+	}
+	else
+	{
+		utils::SetColor(Color4f{ 1,1,1,1 });
+	}
+	
+	utils::FillRect(m_Viewport);
+	
+	EntityManager::Get()->Render();
 }
